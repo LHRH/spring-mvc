@@ -3,6 +3,7 @@ package com.lh.controller;
 import com.github.miemiedev.mybatis.paginator.domain.Order;
 import com.github.miemiedev.mybatis.paginator.domain.PageBounds;
 import com.github.miemiedev.mybatis.paginator.domain.PageList;
+import com.lh.common.HttpClientUtil;
 import com.lh.common.table.BootstrapTable;
 import com.lh.po.Admin;
 import com.lh.po.CarBase;
@@ -11,6 +12,7 @@ import com.lh.po.vo.SelectTree;
 import com.lh.service.IAdminService;
 import com.lh.service.ICarBaseService;
 import com.lh.service.IUserService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.lh.common.JsonUtil.beanToMap;
 
 /**
  * Created by linghu on 17/02/07.
@@ -44,7 +50,40 @@ public class TestController {
 
         PageList<Admin> admins = adminService.fuzzySearchByPager(admin, table.getPageBounds());
         BootstrapTable<Admin> bootstrapTable = new BootstrapTable<>();
+        httClientTest();
+
         return bootstrapTable.setReturn(admins);
+    }
+
+    private static void httClientTest() {
+
+        String url = "http://localhost:8081/spring_aop/test/getStr";
+        String res = HttpClientUtil.httpGet(url);
+        System.out.println("httpGet===============" + res);
+
+        Admin admin = new Admin();
+        admin.setId("httpGet(url,beanToMap(admin)");
+        admin.setPassword("李四");
+        admin.setUserName("李四");
+
+        System.out.println("httpGet==============" + HttpClientUtil.httpGet(url, beanToMap(admin)));
+
+        Map<String, String> map = new HashMap<>();
+        map.put("id", "httpPost(url,beanToMap(admin)");
+        map.put("userPassword", "李四");
+        map.put("userName", "李四");
+        System.out.println("httpPost==============" + HttpClientUtil.httpPost(url));
+        System.out.println("httpPost===============" + HttpClientUtil.httpPost(url, beanToMap(admin)));
+
+        JSONObject jsonParam = new JSONObject();
+        jsonParam.put("id", "httpPostJson(url, jsonParam)");
+        jsonParam.put("userName", "张三");
+        jsonParam.put("password", "张三");
+        System.out.println("httpPost===============" + HttpClientUtil.httpPostJson(url, jsonParam));
+
+        String json = "{\"id\":\"httpPostJson(url, JSONObject.fromObject(json)\",\"userName\":\"admin\",\"password\":\"123456\"}";
+        System.out.println("httpPost===============" + HttpClientUtil.httpPostJson(url, JSONObject.fromObject(json)));
+
     }
 
     @RequestMapping("cxSelect1")
