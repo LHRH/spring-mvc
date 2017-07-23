@@ -1,16 +1,26 @@
 package com.lh.service.impl;
 
+import com.lh.common.dao.IBaseDao;
+import com.lh.common.service.impl.BaseServiceImpl;
 import com.lh.po.User;
+import com.lh.repository.IUserMybatisDao;
 import com.lh.service.IUserService;
-import org.springframework.stereotype.Service;
+import java.util.UUID;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-/**
- * Created by linghu on 17/02/19.
- */
-@Service
-public class UserServiceImpl implements IUserService {
-    @Override
-    public void save(User user) {
-        System.out.println("serviceImpl"+user.getName());
+@Component("UserServiceImpl")
+public class UserServiceImpl extends BaseServiceImpl<User> implements IUserService {
+    @Autowired
+    private IUserMybatisDao userMybatisDao;
+
+    public IBaseDao<User> getDao() {
+        return this.userMybatisDao;
+    }
+
+    public void setKey(User record) {
+        if(record.getId() == null || "".equals(record.getId())) {
+            record.setId(UUID.randomUUID().toString());
+        }
     }
 }

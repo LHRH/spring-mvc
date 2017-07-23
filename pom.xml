@@ -9,7 +9,12 @@
     <url>http://maven.apache.org</url>
     <properties>
         <!-- 主要依赖库的版本定义 start -->
-        <spring.version>4.3.0.RELEASE</spring.version>
+        <spring.version>4.2.0.RELEASE</spring.version>
+        <!-- mybatis版本号 -->
+        <mybatis.version>3.2.6</mybatis.version>
+        <org.slf4j.version>1.7.13</org.slf4j.version>
+        <cxf.version>3.1.6</cxf.version>
+        <activemq_version>5.13.1</activemq_version>
     </properties>
     <dependencies>
         <!--添加后可以选择创建spring xml文件-->
@@ -50,6 +55,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
@@ -80,6 +91,64 @@
             <version>1.7.13</version>
         </dependency>
 
+        <!--ajax请求出现406-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.7.4</version>
+        </dependency>
+
+        <!-- 2.数据库 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.37</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>c3p0</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.1.2</version>
+        </dependency>
+
+        <!-- DAO: MyBatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <!-- <dependency>
+             <groupId>org.apache.httpcomponents</groupId>
+             <artifactId>httpclient</artifactId>
+             <version>4.5.3</version>
+         </dependency>-->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.3.4</version>
+        </dependency>
+
+
         <!--jstl-->
         <dependency>
             <groupId>jstl</groupId>
@@ -93,6 +162,13 @@
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.github.miemiedev/mybatis-paginator -->
+        <dependency>
+            <groupId>com.github.miemiedev</groupId>
+            <artifactId>mybatis-paginator</artifactId>
+            <version>1.2.13</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>spring_mvc</finalName>

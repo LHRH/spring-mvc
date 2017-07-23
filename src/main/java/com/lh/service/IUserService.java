@@ -1,10 +1,7 @@
 package com.lh.service;
 
+import com.lh.common.service.IBaseService;
 import com.lh.po.User;
 
-/**
- * Created by linghu on 17/02/19.
- */
-public interface IUserService {
-     void save(User user);
+public interface IUserService extends IBaseService<User> {
 }

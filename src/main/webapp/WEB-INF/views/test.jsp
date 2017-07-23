@@ -13,7 +13,7 @@
     <title>Title</title>
     <script type="text/javascript" src="${ctp}/static/assets/jquery/1.12.1/jquery.js"></script>
 </head>
-<input type="text" id="text">
+<input type="text" id="text" value="${userName}">
 <button id="btn">点击获取名称</button>
 <body>
 <script>

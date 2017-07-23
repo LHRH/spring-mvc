@@ -12,11 +12,15 @@
     <mvc:annotation-driven/>
 
     <!--对静态资源的访问-->
-    <mvc:resources mapping="/static/**" location="/static/"/>
+    <mvc:resources mapping="/assets/**" location="/static/assets/"/>
+    <mvc:resources mapping="/js/**" location="static/js/"/>
+    <mvc:resources mapping="/css/**" location="static/css/"/>
+    <mvc:resources mapping="/img/**" location="static/img/"/>
 
     <!-- 自动扫描且只扫描@Controller -->
-    <context:component-scan base-package="com.lh">
+    <context:component-scan base-package="com.lh" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!--使用CGLib动态代理-->
@@ -27,5 +31,37 @@
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+
+    <!--<bean id="fastJsonConfig" class="com.alibaba.fastjson.support.config.FastJsonConfig">
+        &lt;!&ndash; Default charset &ndash;&gt;
+        <property name="charset" value="UTF-8"/>
+        <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
+        &lt;!&ndash; SerializerFeature &ndash;&gt;
+        <property name="serializerFeatures">
+            <list>
+                <value>QuoteFieldNames</value>
+                <value>WriteNullBooleanAsFalse</value> &lt;!&ndash;Boolean字段如果为null，输出为false，而不是null&ndash;&gt;
+            </list>
+        </property>
+    </bean>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                    <constructor-arg value="UTF-8"/>
+                </bean>
+                &lt;!&ndash; 配置Fastjson支持 &ndash;&gt;
+                <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+                    <property name="supportedMediaTypes">
+                        <list>
+                            <value>application/json</value>
+                        </list>
+                    </property>
+                    <property name="fastJsonConfig" ref="fastJsonConfig"/>
+                </bean>
+            </list>
+        </property>
+    </bean>-->
 
 </beans>
