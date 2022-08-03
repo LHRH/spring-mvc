@@ -16,6 +16,7 @@
         <cxf.version>3.1.6</cxf.version>
         <activemq_version>5.13.1</activemq_version>
     </properties>
+
     <dependencies>
         <!--添加后可以选择创建spring xml文件-->
         <dependency>
